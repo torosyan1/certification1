@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gayane's Certification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #inputField {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #downloadButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #downloadButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="inputField" placeholder="Enter your full name">
+    <button id="downloadButton" onclick="sendAndDownload()">Downloaded</button>
+
+    <script>
+        function sendAndDownload() {
+            const inputValue = document.getElementById('inputField').value;
+            const url = 'http://localhost:3000/jpg'; // Replace with your API endpoint
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: inputValue, type: 'vip' }),
+            })
+            .then(response => {
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob(); // Get the image as a blob
+            })
+            .then(blob => {
+                // Create a temporary URL for the blob
+                const imageUrl = URL.createObjectURL(blob);
+                // Create a link element to trigger the download
+                const link = document.createElement('a');
+                link.href = imageUrl;
+                link.download = 'downloaded_image.png'; // Set the filename for the downloaded image
+                document.body.appendChild(link);
+                // Click the link to trigger the download
+                link.click();
+                // Clean up: remove the link and revoke the temporary URL
+                URL.revokeObjectURL(imageUrl);
+                link.remove();
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+    </script>
+</body>
+</html>
