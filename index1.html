@@ -44,14 +44,17 @@
     <script>
         function sendAndDownload() {
             const inputValue = document.getElementById('inputField').value;
-            const url = 'http://localhost:3000/jpg'; // Replace with your API endpoint
-
+            const url = 'https://certification1.onrender.com/jpg'; // Replace with your API endpoint
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const type = urlParams.get('type')
+            console.log(type)
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name: inputValue, type: 'standart' }),
+                body: JSON.stringify({ name: inputValue, type, }),
             })
             .then(response => {
                 console.log(response)
