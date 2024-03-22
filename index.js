@@ -24,7 +24,7 @@ app.post('/jpg', async (req, res) => {
     } else if (type === 'premium') {
       path = './56565656.jpg';
     } else {
-      path = './IMG_6348.PNG'
+      path = './IMG_6347.PNG'
     }
 
     // Load the image
