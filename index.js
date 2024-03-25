@@ -36,9 +36,9 @@ app.post('/jpg', async (req, res) => {
         // Add text to the image
         let a = 900
         let b = 1510
-        if(path==='premium') {
+        if(type==='premium') {
           a = 1200
-          b =1900
+          b = 1900
         }
         image.print(font, a, b, name);
 
