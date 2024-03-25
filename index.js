@@ -22,7 +22,7 @@ app.post('/jpg', async (req, res) => {
     if (type === 'standart') {
       path = './IMG_6346.PNG';
     } else if (type === 'premium') {
-      path = './56565656.PNG';
+      path = './IMG_2352.PNG';
     } else {
       path = './IMG_6347.PNG'
     }
