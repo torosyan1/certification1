@@ -22,7 +22,7 @@ app.post('/jpg', async (req, res) => {
     if (type === 'standart') {
       path = './IMG_6346.PNG';
     } else if (type === 'premium') {
-      path = './IMG_2352.PNG';
+      path = './IMG_2352aaaa.PNG';
     } else {
       path = './IMG_6347.PNG'
     }
@@ -34,7 +34,13 @@ app.post('/jpg', async (req, res) => {
       // Load the font
       await Jimp.loadFont(Jimp.FONT_SANS_128_BLACK).then(async (font) => {
         // Add text to the image
-        image.print(font, 900, 1510, name);
+        let a = 900
+        let b = 1510
+        if(path==='premium') {
+          a = 1200
+          b =1900
+        }
+        image.print(font, a, b, name);
 
         // Save the modified image
         await image.write('output.jpg', (err) => {
